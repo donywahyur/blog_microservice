@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: posts-depl
+    name: comments-depl
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: posts #find the pods with this label
+            app: comments #find the pods with this label
     template:
         metadata:
             labels:
-                app: posts
+                app: comments
         spec:
             containers:
-                - name: posts
-                  image: donyramadhan/blog_posts:latest
+                - name: comments
+                  image: donyramadhan/blog_comments:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: posts-clusterip-srv
+    name: comments-srv
 spec:
     type: ClusterIP #default when not specified
     selector:
-        app: posts
+        app: comments
     ports:
-        - name: posts
+        - name: comments
           protocol: TCP
-          port: 4000
-          targetPort: 4000
+          port: 4001
+          targetPort: 4001

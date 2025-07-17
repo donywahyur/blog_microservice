@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: posts-depl
+    name: moderation-depl
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: posts #find the pods with this label
+            app: moderation #find the pods with this label
     template:
         metadata:
             labels:
-                app: posts
+                app: moderation
         spec:
             containers:
-                - name: posts
-                  image: donyramadhan/blog_posts:latest
+                - name: moderation
+                  image: donyramadhan/blog_moderation:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: posts-clusterip-srv
+    name: moderation-srv
 spec:
     type: ClusterIP #default when not specified
     selector:
-        app: posts
+        app: moderation
     ports:
-        - name: posts
+        - name: moderation
           protocol: TCP
-          port: 4000
-          targetPort: 4000
+          port: 4003
+          targetPort: 4003

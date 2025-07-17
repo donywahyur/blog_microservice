@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: posts-depl
+    name: event-bus-depl
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: posts #find the pods with this label
+            app: event-bus #find the pods with this label
     template:
         metadata:
             labels:
-                app: posts
+                app: event-bus
         spec:
             containers:
-                - name: posts
-                  image: donyramadhan/blog_posts:latest
+                - name: event-bus
+                  image: donyramadhan/blog_event-bus:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: posts-clusterip-srv
+    name: event-bus-srv
 spec:
     type: ClusterIP #default when not specified
     selector:
-        app: posts
+        app: event-bus
     ports:
-        - name: posts
+        - name: event-bus
           protocol: TCP
-          port: 4000
-          targetPort: 4000
+          port: 4005
+          targetPort: 4005
